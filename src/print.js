@@ -2,4 +2,4 @@ var print = function printMe() {
     console.log('I get called from print.js!');
 }
 
-export default print
+module.exports = print
