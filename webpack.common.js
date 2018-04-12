@@ -1,14 +1,26 @@
 const path = require('path')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        index: './src/index.js',
+        another: './src/another-module.js'
+    },
     output: {
-        filename: "bundle.js",
+        filename: "[name].bundle.js",
         path: path.resolve(__dirname, 'dist'),
         publicPath: "dist/"
     },
+    optimization: {
+        splitChunks: {
+            name: 'common',
+            chunks: 'all'
+        }
+    },
     plugins: [
-        new UglifyJSPlugin()
+        new HTMLWebpackPlugin({
+            title: 'Code Splitting'
+        })
     ]
 }

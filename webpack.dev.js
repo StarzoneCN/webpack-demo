@@ -1,24 +1,17 @@
 const merge = require('webpack-merge')
 const commonConfig = require('./webpack.common.js')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const config = {
     mode: 'development',
-    devtool: 'inline-source-map',
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: "css-loader"
-                })
+                use: ['style-loader', 'css-loader']
             }
         ]
     },
-    plugins: [
-        new ExtractTextPlugin("styles.css"),
-    ]
+    devtool: 'inline-source-map'
 }
 
 module.exports = merge(commonConfig, config)
