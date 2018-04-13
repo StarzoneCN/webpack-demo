@@ -1,11 +1,23 @@
-import _ from 'lodash'
+import _ from 'lodash';
 
-function component() {
-    var element = document.createElement('div');
+function getComponent() {
+    let element = document.createElement('div');
+    let button = document.createElement('button');
+    let br = document.createElement('br');
 
-    // Lodash（目前通过一个 script 脚本引入）对于执行这一行是必需的
+    button.innerHTML = 'Click me and look at the console!';
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    return element;
+    element.appendChild(br);
+    element.appendChild(button);
+
+    button.onclick = e => import(
+        /* webpackChunkName: "print" */
+        /* webpackMode: "lazy" */
+        './print').then(module => {
+            let print = module.default;
+            print();
+        })
+    return element
 }
 
-document.body.appendChild(component());
+document.body.appendChild(getComponent());
