@@ -1,9 +1,15 @@
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const cleanWebpack = require('clean-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        main: './src/index.js',
+        vendor: [
+            'lodash'
+        ]
+    },
     output: {
         filename: "[name].[chunkhash].bundle.js",
         path: path.resolve(__dirname, 'dist'),
@@ -14,5 +20,10 @@ module.exports = {
         new HTMLWebpackPlugin({
             title: 'Caching'
         })
-    ]
+    ],
+    optimization: {
+        splitChunks: {
+            name: 'manifest'
+        }
+    }
 }
