@@ -27,6 +27,7 @@
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
+    "clean-webpack-plugin": "^0.1.19",
     "lodash": "^4.17.5"
   }
 }
